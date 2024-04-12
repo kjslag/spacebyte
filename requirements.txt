@@ -1,0 +1,10 @@
+tqdm
+zstandard
+fire
+numpy
+torch>=2.0.0
+wandb
+datasets
+tiktoken
+sentencepiece
+flash-attn>=2.3.0
