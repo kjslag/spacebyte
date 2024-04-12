@@ -68,4 +68,4 @@ python3 reproduce/jobs.py
 The trained models will appear in a `spacebyte` subdirectory.
 wandb will be used for logging into a project named `spacebyte`.
 
-To create the plots and table data in the paper, move `reproduce/plots.py` the `reproduce/experiments.ipynb` jupyter notebook into the main directory and run the jupyter notebook.
+To create the plots and table data in the paper, move `reproduce/plots.py` and the `reproduce/experiments.ipynb` jupyter notebook into the main directory and run the jupyter notebook.
