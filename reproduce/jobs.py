@@ -32,7 +32,7 @@ for dataset in ['github', 'arxiv', 'pg19']:
                     for L in Ls:
                         P = 6 if 'github' not in dataset else 8
                         args = dict(dataset=dataset, flops=flops, tokenizer=tok, batch_size=B, lr=lr, beta2=beta2,
-                        context_size=d, d_model=d, n_layers=L, rope=rope, out_dir=out_dir)
+                            context_size=d, d_model=d, n_layers=L, rope=rope, out_dir=out_dir)
 
                         good_L = L == Ld[d]//2 or L == Ld[d]
                         if good_L and 2 <= L:
