@@ -66,8 +66,19 @@ class MeanError:
 
     def error(self):
         n = self.n
-        return ((self.sum_squares/n - (self.sum/n)**2) / (n-1) )**0.5 \
-            if n > 1 else float('nan') * self.sum
+        if n == 0:
+            return float('nan') * self.sum
+        err = (self.sum_squares/n - (self.sum/n)**2) / (n-1)
+        if isinstance(err, float):
+            err = max(0, err)
+        elif isinstance(err, torch.Tensor):
+            err = err.clamp(min=0)
+        elif isinstance(err, np.ndarray):
+            err = np.clip(err, 0, None)
+        else:
+            print(type(err))
+            assert False
+        return err**0.5
 
 byte_BOS = 255
 

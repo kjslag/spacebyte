@@ -226,8 +226,7 @@ class Transformer(Model):
                 tokens[:, t] = next_token
         del cache
 
-        logits = [generated_logits] if logits else []
-        return tokens, *logits
+        return tokens, generated_logits if logits else None
 
 class Logits(nn.Module):
     def __init__(self, config, tied_token_embedding=None):
@@ -396,7 +395,7 @@ class SelfAttention(nn.Module):
                 K = K.view(B, g, 1, Tk, d_k)
                 V = V.view(B, g, 1, Tk, d_k)
                 if mask is not None:
-                    mask = mask[:, None]
+                    mask = mask[None]
 
             x = F.scaled_dot_product_attention(Q, K, V, attn_mask=mask, is_causal=mask is None)
             x = x.view(B, n_h, Tx, d_k).transpose(1, 2).contiguous()

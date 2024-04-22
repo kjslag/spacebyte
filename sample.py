@@ -67,11 +67,10 @@ def sample(
         with util.autocast_context(dtype):
             for _ in range(num_samples):
                 t0 = time.time()
-                tokens, *logits = model.generate(start_tokens, max_tokens=max_tokens, temperature=temperature,
+                tokens, logits = model.generate(start_tokens, max_tokens=max_tokens, temperature=temperature,
                     top_k=top_k, logits=check_logits, check_logits_func=check_logits_func if check_logits else None)
                 t0 = time.time() - t0
                 if check_logits:
-                    logits, = logits
                     T = model.config.context_size
                     forward_logits, _ = model(tokens[:, :-1][:, :T], tokens[:, 1:1+T])
                     check_logits_func(forward_logits - logits[:, :T])
