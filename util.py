@@ -245,7 +245,7 @@ def cross_entropy(logits, targets, reduction='mean', ignore_index=None):
         
         # NOTE: pytorch takes the mean over batch and context at the same time,
         # which isn't invariant under changes of micro-batch size when some indices are ignored
-        # to fix this, we take the mean over the context before taking a seperate mean over the batch
+        # to fix this, we take the mean over the context before taking a separate mean over the batch
 
         cross_entropy = cross_entropy.sum(1) / (targets >= 0).sum(1) # B
         if reduction == 'context':
